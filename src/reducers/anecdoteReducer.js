@@ -33,7 +33,6 @@ const anecdoteSlice = createSlice({
         id: getId(),
         votes: 0
       })
-      setNotification(`anecdote: ${action.payload} has been added`)
     },
     anecdoteVote(state, action) {
       const id = action.payload
@@ -41,7 +40,6 @@ const anecdoteSlice = createSlice({
       if (anecdoteToVote) {
         anecdoteToVote.votes++
       }
-      setNotification(`you voted ${anecdoteToVote[id]}`)
       state.sort((a, b) => b.votes - a.votes)
     }
   }
@@ -66,6 +64,8 @@ export const voteOnAnecdote = (id) => async (dispatch, getState) => {
     }, 5000);
   }
 }
+
+export const getAnecdotes = state => state.anecdotes
 
 export const { addAnecdote, anecdoteVote } = anecdoteSlice.actions
 
